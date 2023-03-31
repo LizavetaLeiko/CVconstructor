@@ -1,0 +1,67 @@
+<template>
+  <div class="signin">
+    <h1 class="signin__title">Welcome to CV constructor</h1>
+    <form class="signin__form">
+      <h2 class="signin__form__title">Please, {{isSignUp ? 'sign up' : 'sign in'}} </h2>
+      <div class="signin__form__inputs" >
+        <DefaultInput label="Email"/>
+        <DefaultInput type="password" label="Password"/>
+      </div>
+      <DefaultBtn>{{isSignUp ? 'Sign up' : 'Sign in'}}</DefaultBtn>
+    </form>
+    <div class="signin__bottom">
+      <p>{{isSignUp ? "Already have an account?" :  "Don't have an account yet?"}}</p>
+      <button @click="toggleIsSignUp">{{isSignUp ?  'SignIn' : 'SignUp'}}</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Index',
+  data(){
+    return{
+      isSignUp: false,
+    }
+  },
+  methods:{
+    toggleIsSignUp(){
+      this.isSignUp = !this.isSignUp
+    }
+  }
+};
+</script>
+
+<style lang="sass" scoped>
+.signin
+  text-align: center
+  &__title
+    font-size: 38px
+    margin-bottom: 60px
+  &__form
+    width: 45%
+    margin: 0 auto
+    padding: 35px 20px 
+    background-color: #fff
+    margin-bottom: 40px
+    &__title
+      color: #000
+      font-size: 30px
+    &__inputs
+      margin: 20px 0 30px
+      text-align: left
+      display: flex
+      flex-direction: column
+      gap: 20px
+  &__bottom
+    p
+      font-size: 20px
+    button
+      cursor: pointer
+      padding: 10px 5px 5px
+      background: transparent
+      border: none
+      color: #fff
+      font-size: 18px
+      border-bottom: .3px #fff solid
+</style>
