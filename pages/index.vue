@@ -4,8 +4,8 @@
     <form class="signin__form">
       <h2 class="signin__form__title">Please, {{isSignUp ? 'sign up' : 'sign in'}} </h2>
       <div class="signin__form__inputs" >
-        <DefaultInput label="Email"/>
-        <DefaultInput type="password" label="Password"/>
+        <DefaultInput label="Email" forForm="true"/>
+        <DefaultInput type="password" label="Password" forForm="true"/>
       </div>
       <DefaultBtn>{{isSignUp ? 'Sign up' : 'Sign in'}}</DefaultBtn>
     </form>
@@ -35,6 +35,7 @@ export default {
 <style lang="sass" scoped>
 .signin
   text-align: center
+  padding: 80px
   &__title
     font-size: 38px
     margin-bottom: 60px

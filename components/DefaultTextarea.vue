@@ -1,10 +1,9 @@
 <template>
-  <div v-if="isEditble || forForm" class="container">
-    <label for="input" class="label">{{label}}</label>
-    <input :value="modelValue" @input="updateInput" class="input" id="input" :type="type" :placeholder="placeholder">
+  <div v-if="isEditble" class="container">
+    <textarea :value="modelValue" @input="updateTextarea" rows="7" :placeholder="placeholder"/>
   </div>
-  <div v-else class="container">
-    <p class="display__p">{{modelValue}}</p>
+  <div v-else >
+    <p>{{modelValue}}</p>
   </div>
 </template>
 
@@ -13,20 +12,12 @@ export default {
   name: 'DefaultInput',
   props: {
     modelValue: [String, String],
-    type: {
+    placeholder: {
       type: String,
-      default: 'text'
-    },
-    label: {
-      type: String,
-    },
-    forForm:  {
-      type: Boolean,
-      default: false
     },
   },
   methods: {
-    updateInput(event) {
+    updateTextarea(event) {
       this.$emit('update:modelValue', event.target.value)
     }
   },
@@ -44,18 +35,17 @@ export default {
   display: flex
   flex-direction: column
   gap: 10px
-.input
+textarea
   padding: 10px
   outline: none
   border: 1px solid #000
   font-size: 18px
   width: 100%
+  resize: none
   &:hover
     border: 1px solid #8f8f8f
   &:focus
     border: 1px solid #DADADA
-.label
-  font-size: 22px
 p
-  font-size: 18px
+  font-size: 18px 
 </style>  

@@ -10,7 +10,6 @@
   margin: 0;
 }
 .app{
-  padding: 80px;
   background-color: black;
   min-height: 100vh;
   color: #fff;
