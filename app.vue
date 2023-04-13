@@ -13,6 +13,7 @@
   background-color: black;
   min-height: 100vh;
   color: #fff;
+  font-family: 'Lato', sans-serif;
 }
 
 </style>

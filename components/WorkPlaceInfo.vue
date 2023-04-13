@@ -3,9 +3,9 @@
     <DefaultInput placeholder="Company's name"/>
     <DefaultInput placeholder="Role"/>
     <div class="container__date">
-      <DefaultInput placeholder="since"/>
+      <DefaultInput style="width: 15%;" placeholder="since"/>
       <span>-</span>
-      <DefaultInput placeholder="for"/>
+      <DefaultInput style="width: 15%;" placeholder="for"/>
     </div>
     <DefaultInput placeholder="Tecnologes"/>
     <DefaultTextarea placeholder="Description"/>

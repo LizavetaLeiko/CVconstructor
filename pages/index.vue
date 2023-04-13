@@ -7,6 +7,7 @@
         <DefaultInput label="Email" forForm="true"/>
         <DefaultInput type="password" label="Password" forForm="true"/>
       </div>
+      <div>{{ isEditable }}</div>
       <DefaultBtn>{{isSignUp ? 'Sign up' : 'Sign in'}}</DefaultBtn>
     </form>
     <div class="signin__bottom">
@@ -28,7 +29,7 @@ export default {
     toggleIsSignUp(){
       this.isSignUp = !this.isSignUp
     }
-  }
+  },
 };
 </script>
 

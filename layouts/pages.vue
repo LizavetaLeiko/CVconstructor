@@ -1,8 +1,7 @@
 <template>
     <header>
       <div>
-        <BtnWithoutBg @click="setIsEditble">Edit resume</BtnWithoutBg>
-        <BtnWithoutBg>Edit colors</BtnWithoutBg>
+        <BtnWithoutBg @click="isEditableStore.changeIsEditable">Edit resume</BtnWithoutBg>
       </div>
       <DefaultBtn class="btn">Logout</DefaultBtn>
     </header>
@@ -10,21 +9,17 @@
 </template>
 
 <script>
+
+import { useIsEditableStore } from '~~/store/edit';
+
 export default {
   name: 'LayoutPages',
-  methods:{
-    ...mapMutations({
-      setIsEditble: 'pages/setIsEditble',
-    }),
-  },
-  computed: {
-    ...mapState({
-      isEditble: state => state.pages.isEditble,
-    }),
-    ...mapGetters({
-      getIsEditable: 'pages/getIsEditable',
-    })
-  },
+  setup(){
+    const isEditableStore = useIsEditableStore();
+    return{
+      isEditableStore
+    }
+  }
 }
 </script>
 

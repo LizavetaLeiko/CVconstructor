@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isEditble" class="container">
+  <div v-if="isEditableStore.isEditable" class="container">
     <textarea :value="modelValue" @input="updateTextarea" rows="7" :placeholder="placeholder"/>
   </div>
   <div v-else >
@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { useIsEditableStore } from '~~/store/edit';
+
 export default {
   name: 'DefaultInput',
   props: {
@@ -21,11 +23,12 @@ export default {
       this.$emit('update:modelValue', event.target.value)
     }
   },
-  computed: {
-    ...mapState({
-      isEditble: state => state.pages.isEditble,
-    }),
-  },
+  setup(){
+    const isEditableStore = useIsEditableStore();
+    return{
+      isEditableStore
+    }
+  }
 };
 </script>
 
@@ -35,6 +38,7 @@ export default {
   display: flex
   flex-direction: column
   gap: 10px
+  width: 100%
 textarea
   padding: 10px
   outline: none
@@ -42,6 +46,8 @@ textarea
   font-size: 18px
   width: 100%
   resize: none
+  opacity: 95%
+  border-radius: 10px
   &:hover
     border: 1px solid #8f8f8f
   &:focus
