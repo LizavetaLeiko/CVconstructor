@@ -18,20 +18,20 @@
           </div>
           <div>
             <h4>Contacts</h4>
-            <div>
-              <Contacts/>
+            <div class="list">
+              <Contacts v-for="contact in contactsAmount" :key="contact"/>
             </div>
-            <DefaultBtn class="btn">One more</DefaultBtn>
+            <DefaultBtn v-if="isEditableStore.isEditable" @click="increaseContactsAmount" class="btn">One more</DefaultBtn>
           </div>
         </div>
       </div>
       <div class="user__chapter">
         <div>
           <h3>Hard skills</h3>
-          <div>
-            <DefaultInput placeholder="Skill"/>
+          <div class="list">
+            <DefaultInput v-for="skill in skillsAmount" :key="skill" placeholder="Skill"/>
           </div>
-          <DefaultBtn class="btn">One more</DefaultBtn>
+          <DefaultBtn v-if="isEditableStore.isEditable" class="btn" @click="increaseSkillsAmount">One more</DefaultBtn>
           </div>
         <div>
           <h3>About me</h3>
@@ -46,17 +46,17 @@
     <div class="user__right user__chapter">
       <div>
         <h3>Work experience</h3>
-        <div>
-          <WorkPlaceInfo/>
+        <div class="list">
+          <WorkPlaceInfo v-for="work in worksAmount" :key="work"/>
         </div>
-        <DefaultBtn class="btn">One more</DefaultBtn>
+        <DefaultBtn v-if="isEditableStore.isEditable" class="btn" @click="increaseWorksAmount">One more</DefaultBtn>
       </div>
       <div>
         <h3>More about technologes</h3>
-        <div>
-          <MoreAboutTech/>
+        <div class="list">
+          <MoreAboutTech v-for="tech in techsAmount" :key="thech"/>
         </div>
-        <DefaultBtn class="btn">One more</DefaultBtn>
+        <DefaultBtn v-if="isEditableStore.isEditable" @click="increaseTechsAmount" class="btn">One more</DefaultBtn>
       </div>
     </div>
   </div>
@@ -66,8 +66,31 @@
 <script>
 import { useIsEditableStore } from '~~/store/edit'; 
 
+
 export default {
   name: 'UserId',
+  data(){
+    return{
+      contactsAmount: 1,
+      skillsAmount: 1,
+      worksAmount: 1,
+      techsAmount: 1,
+    }
+  },
+  methods:{
+    increaseContactsAmount(){
+      this.contactsAmount++
+    },
+    increaseSkillsAmount(){
+      this.skillsAmount++
+    },
+    increaseWorksAmount(){
+      this.worksAmount++
+    },
+    increaseTechsAmount(){
+      this.techsAmount++
+    },
+  },
   setup(){
     const isEditableStore = useIsEditableStore();
     return{
@@ -106,7 +129,6 @@ h4
       align-items: flex-start
       margin-bottom: 30px
   &__chapter
-    width: 100%
     gap: 20px
     display: flex
     justify-content: start
@@ -121,4 +143,10 @@ h4
   padding: 5px
   font-size: 16px
   margin-top: 15px
+.list
+  gap: 15px
+  display: flex
+  justify-content: start
+  flex-direction: column
+  align-items: stretch
 </style>
