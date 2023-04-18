@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useIsEditableStore = defineStore('edit', {
+export const useUserStore = defineStore('user', {
   state: () => ({ 
     userBase: {
       email: '',
