@@ -3,6 +3,22 @@
     <NuxtPage />
   </div>
 </template>
+<script>
+import { useUserStore } from '~/store/user';
+export default {
+  name: 'app',
+  mounted(){
+    this.userStore.getUserQuery('643e984d5327b8e13d8017ec');
+  },
+  setup(){
+    const userStore = useUserStore();
+
+    return{
+      userStore
+    }
+  }
+};
+</script>
 <style>
 *{
   box-sizing: border-box;

@@ -1,7 +1,8 @@
 <template>
   <div v-if="isEditableStore.isEditable || forForm" class="container">
-    <label v-if="label" for="input" class="label">{{label}}</label>
-    <input :value="modelValue" @input="updateInput" class="input" id="input" :type="type" :placeholder="placeholder">
+    <label v-if="label" class="label">{{label}}
+    <input :value="modelValue" @input="updateInput" class="input"  :type="type" :placeholder="placeholder">
+  </label>
   </div>
   <div v-else class="container">
     <p class="display__p">{{modelValue}}</p>
@@ -59,13 +60,13 @@ export default {
   width: 100%
   opacity: 95%
   border-radius: 10px
+  margin-top: 10px
   &:hover
     border: 1px solid #8f8f8f
   &:focus
     border: 1px solid #DADADA
 .label
   font-size: 22px
-  margin-bottom: 10px
 p
   font-size: 18px
 </style>  

@@ -7,19 +7,19 @@
           <img src="../../public/imgs/defaultPhotoCV.jpg" alt="User photo">
         </div>
         <div class="user__chapter less">
-          <DefaultInput placeholder="My name"/>
+          <!-- <DefaultInput placeholder="My name" v-model="userStore.userData.name"/> -->
           <div>
             <h4>Speciality</h4>
-            <DefaultInput placeholder="Frontend dev"/>
+            <!-- <DefaultInput placeholder="Frontend dev" v-model="userStore.userData.speciality"/> -->
           </div>
           <div>
             <h4>Experience (years)</h4>
-            <DefaultInput placeholder="1"/>
+            <!-- <DefaultInput placeholder="1" v-model="userStore.userData.experiens"/> -->
           </div>
           <div>
             <h4>Contacts</h4>
             <div class="list">
-              <Contacts v-for="contact in contactsAmount" :key="contact"/>
+              <!-- <Contacts v-for="contact in contactsAmount" :key="contact" v-model="userStore.userData.contacts"/> -->
             </div>
             <DefaultBtn v-if="isEditableStore.isEditable" @click="increaseContactsAmount" class="btn">One more</DefaultBtn>
           </div>
@@ -29,17 +29,17 @@
         <div>
           <h3>Hard skills</h3>
           <div class="list">
-            <DefaultInput v-for="skill in skillsAmount" :key="skill" placeholder="Skill"/>
+            <!-- <DefaultInput v-for="skill in skillsAmount" :key="skill" v-model="userStore.userData.hardSkills" placeholder="Skill"/> -->
           </div>
           <DefaultBtn v-if="isEditableStore.isEditable" class="btn" @click="increaseSkillsAmount">One more</DefaultBtn>
           </div>
         <div>
           <h3>About me</h3>
-          <DefaultTextarea/>
+          <DefaultTextarea v-model="userStore.userData.aboutMe"/>
         </div>
         <div>
           <h3>Education</h3>
-          <DefaultTextarea/>
+          <DefaultTextarea v-model="userStore.userData.education"/>
         </div>
       </div>
     </div>
@@ -47,14 +47,14 @@
       <div>
         <h3>Work experience</h3>
         <div class="list">
-          <WorkPlaceInfo v-for="work in worksAmount" :key="work"/>
+          <WorkPlaceInfo v-for="work in worksAmount" :key="work" v-model="userStore.userData.work"/>
         </div>
         <DefaultBtn v-if="isEditableStore.isEditable" class="btn" @click="increaseWorksAmount">One more</DefaultBtn>
       </div>
       <div>
         <h3>More about technologes</h3>
         <div class="list">
-          <MoreAboutTech v-for="tech in techsAmount" :key="thech"/>
+          <MoreAboutTech v-for="tech in techsAmount" :key="thech" v-model="userStore.userData.technologes"/>
         </div>
         <DefaultBtn v-if="isEditableStore.isEditable" @click="increaseTechsAmount" class="btn">One more</DefaultBtn>
       </div>
@@ -65,6 +65,7 @@
 
 <script>
 import { useIsEditableStore } from '~~/store/edit'; 
+import { useUserStore } from '~/store/user';
 
 
 export default {
@@ -93,8 +94,11 @@ export default {
   },
   setup(){
     const isEditableStore = useIsEditableStore();
+    const userStore = useUserStore();
+
     return{
-      isEditableStore
+      isEditableStore,
+      userStore
     }
   }
 };

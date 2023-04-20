@@ -4,11 +4,11 @@
     <form class="signin__form">
       <h2 class="signin__form__title">Please, {{isSignUp ? 'sign up' : 'sign in'}} </h2>
       <div class="signin__form__inputs" >
-        <DefaultInput label="Email" forForm="true"/>
-        <DefaultInput type="password" label="Password" forForm="true"/>
+        <DefaultInput label="Email" forForm=true v-model="email"/>
+        <DefaultInput type="password" label="Password" forForm=true v-model="password"/>
       </div>
       <div>{{ isEditable }}</div>
-      <DefaultBtn>{{isSignUp ? 'Sign up' : 'Sign in'}}</DefaultBtn>
+      <DefaultBtn @click.prevent="isSignUp ? userStore.registerUser(email, password) : userStore.loginUser(email, password)">{{isSignUp ? 'Sign up' : 'Sign in'}}</DefaultBtn>
     </form>
     <div class="signin__bottom">
       <p>{{isSignUp ? "Already have an account?" :  "Don't have an account yet?"}}</p>
@@ -18,11 +18,21 @@
 </template>
 
 <script>
+import { useUserStore } from '~/store/user';
+
 export default {
   name: 'Index',
   data(){
     return{
       isSignUp: false,
+      email: '',
+      password: ''
+    }
+  },
+  setup(){
+    const userStore = useUserStore();
+    return{
+      userStore
     }
   },
   methods:{

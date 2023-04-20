@@ -31,10 +31,11 @@ export const useUserStore = defineStore('user', {
   actions: {
     async registerUser(login, password) {
       try {
-        const response = await axios.post('http://localhost:8000/api/registration', { login, password })
-        this.userBase.email = response.data.user.email
-        this.userBase.id = response.data.user.id 
-        this.userBase.userDataId = response.data.user.userDataId       
+        const response = await axios.post('http://localhost:8000/api/registration', { email: login, password: password })
+        console.log(response)
+        this.userBase.email = response.data.email
+        this.userBase.id = response.data.id 
+        this.userBase.userDataId = response.data.userDataId       
         localStorage.setItem('token', response.data.accessToken);
       } catch (error) {
         return error
@@ -42,10 +43,10 @@ export const useUserStore = defineStore('user', {
     },
     async loginUser(login, password) {
       try {
-        const response = await axios.post('http://localhost:8000/api/login', { login, password })
-        this.userBase.email = response.data.user.email
-        this.userBase.id = response.data.user.id
-        this.userData = response.data.user.userDataId      
+        const response = await axios.post('http://localhost:8000/api/login', { email: login, password: password  })
+        this.userBase.email = response.data.email
+        this.userBase.id = response.data.id
+        this.userData = response.data.userDataId      
         localStorage.setItem('token', response.data.accessToken);
       } catch (error) {
         return error
@@ -63,10 +64,10 @@ export const useUserStore = defineStore('user', {
     async getUserQuery(id) {
       try {
         const response = await axios.get(`http://localhost:8000/api/user/${id}`)
-        this.userBase.email = response.data.user.email
-        this.userBase.id = response.data.user.id
-        this.userBase.password = response.data.user.password
-        this.userData = response.data.user.userDataId      
+        this.userBase.email = response.data.email
+        this.userBase.id = response.data.id
+        this.userBase.password = response.data.password
+        this.userData = response.data.userDataId      
       } catch (error) {
         return error
       }
