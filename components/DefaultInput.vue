@@ -1,31 +1,24 @@
 <template>
-  <div v-if="isEditableStore.isEditable || forForm" class="container">
+  <div class="container">
     <label v-if="label" class="label">{{label}}
-    <input :value="modelValue" @input="updateInput" class="input"  :type="type" :placeholder="placeholder">
+    <input :value="modelValue" @input="setValue(e.target.value)" class="input"  :type="type" :placeholder="placeholder">
   </label>
-  </div>
-  <div v-else class="container">
-    <p class="display__p">{{modelValue}}</p>
   </div>
 </template>
 
 <script>
-import { useIsEditableStore } from '~~/store/edit';
 
 export default {
   name: 'DefaultInput',
   props: {
     modelValue: [String, String],
+    value: [ String, Number, Array],
     type: {
       type: String,
       default: 'text'
     },
     label: {
       type: String,
-    },
-    forForm:  {
-      type: Boolean,
-      default: false
     },
     placeholder:{
       type: String,
@@ -36,12 +29,6 @@ export default {
       this.$emit('update:modelValue', event.target.value)
     }
   },
-  setup(){
-    const isEditableStore = useIsEditableStore();
-    return{
-      isEditableStore
-    }
-  }
 };
 </script>
 
@@ -67,6 +54,4 @@ export default {
     border: 1px solid #DADADA
 .label
   font-size: 22px
-p
-  font-size: 18px
 </style>  

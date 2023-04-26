@@ -1,19 +1,16 @@
 <template>
-  <div v-if="isEditableStore.isEditable" class="container">
+  <div class="container">
     <textarea :value="modelValue" @input="updateTextarea" rows="7" :placeholder="placeholder"/>
-  </div>
-  <div v-else >
-    <p>{{modelValue}}</p>
   </div>
 </template>
 
 <script>
-import { useIsEditableStore } from '~~/store/edit';
 
 export default {
   name: 'DefaultInput',
   props: {
-    modelValue: [String, String],
+    modelValue: '',
+    value: [ String, Number, Array],
     placeholder: {
       type: String,
     },
@@ -23,12 +20,6 @@ export default {
       this.$emit('update:modelValue', event.target.value)
     }
   },
-  setup(){
-    const isEditableStore = useIsEditableStore();
-    return{
-      isEditableStore
-    }
-  }
 };
 </script>
 
@@ -52,6 +43,6 @@ textarea
     border: 1px solid #8f8f8f
   &:focus
     border: 1px solid #DADADA
-p
-  font-size: 18px 
+<!-- p
+  font-size: 18px  -->
 </style>  

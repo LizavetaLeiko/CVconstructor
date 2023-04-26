@@ -1,13 +1,21 @@
 <template>
-  <div class="tech__container">
-    <DefaultInput placeholder="Technology"/>
-    <DefaultTextarea placeholder="Describe yur exrepince with it"/>
+  <div class="tech__container" v-if="edit">
+    <DefaultInput placeholder="Technology" :value="tech[0]"/>
+    <DefaultTextarea placeholder="Describe yur exrepince with it" :value="tech[1]"/>
+  </div>
+  <div class="tech__container" v-else>
+    <p>{{ tech[0] }}</p>
+    <p>{{ tech[1] }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'MoreAboutTech',
+  props:{
+    edit: false,
+    tech: []
+  }
 };
 </script>
 

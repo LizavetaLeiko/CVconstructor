@@ -15,12 +15,21 @@ export const useUserStore = defineStore('user', {
       name: '',
       speciality: '',
       experiens: '',
-      contacts: [],
-      hardSkills: [],
+      contacts: [['CV', 'http://localhost:3000/user/1']],
+      hardSkills: ['git'],
       aboutMe: '',
       education: '',
-      work: [],
-      technologes: [],
+      work: [
+        {company: 'freelance', 
+        role: 'frontend', 
+        date:{ 
+          since: '2022',
+          to: 'now'
+          },
+        techs: 'git, javascript',
+        desc: "Since February 2022 I've been studying  FrontEnd courses and I am also have been studying on my own. This occupation has become my main hobby and goal.Previously  I worked as a sales manager, so I'm very stress-resistant and sociable. I graduated from school with a gold medal and then I was working and studing in the same time, so I am not afraid of a many tasks and mental work! I have experience of communication with native English speakers and work to improve my English. I continue to develop my hard skills by udemy courses and documentations, and also practice a lot. Now I'm actively learning Node.js, for example."
+        }],
+      technologes: [['git', 'use it always'], ['react', 'with next']],
       __v: 0,
     }
   }),
