@@ -13,13 +13,13 @@
   <div class="place__container" v-else>
     <p>{{place.company}}</p>
     <p>{{ place.role }}</p>
-    <div class="place__container__date">
+    <div v-if="place.date.since && place.date.to" class="place__container__date">
       <span>{{ place.date.since }}</span>
       <span>-</span>
       <span>{{ place.date.to }}</span>
     </div>
-    <p>{{ place.techs }}</p>
-    <p>{{ place.desc }}</p>
+    <p v-if="place.techs">{{ place.techs }}</p>
+    <p v-if="place.desc">{{ place.desc }}</p>
   </div>
 </template>
 
@@ -29,14 +29,6 @@ export default {
   props:{
     edit: false,
     place: {
-      // company: 'freelance', 
-      // role: 'frontend', 
-      // date:{ 
-      //   since: '2022',
-      //   to: 'now'
-      // },
-      // techs: 'git, javascript',
-      // desc: "Since February 2022 I've been studying  FrontEnd courses and I am also have been studying on my own. This occupation has become my main hobby and goal.Previously  I worked as a sales manager, so I'm very stress-resistant and sociable. I graduated from school with a gold medal and then I was working and studing in the same time, so I am not afraid of a many tasks and mental work! I have experience of communication with native English speakers and work to improve my English. I continue to develop my hard skills by udemy courses and documentations, and also practice a lot. Now I'm actively learning Node.js, for example."
     }
   }
 };

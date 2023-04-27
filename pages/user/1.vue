@@ -16,7 +16,7 @@
             <h4>Experience (years)</h4>
             <p>{{userStore.userData.experiens}}</p>
           </div>
-          <div>
+          <div v-if="userStore.userData.contacts > 0">
             <h4>Contacts</h4>
             <div class="list">
               <Contacts v-for="contact in userStore.userData.contacts" :key="generateId" />
@@ -35,7 +35,7 @@
           <h3>About me</h3>
           <p>{{userStore.userData.aboutMe}}</p>
         </div>
-        <div>
+        <div v-if="userStore.userData.education">
           <h3>Education</h3>
           <p>{{userStore.userData.education}}</p>
         </div>
@@ -48,7 +48,7 @@
           <WorkPlaceInfo v-for="userWork in userStore.userData.work" :key="generateId" :pValue="userWork"/>
         </div>
       </div>
-      <div>
+      <div v-if="userStore.userData.technologes > 0">
         <h3>More about technologes</h3>
         <div class="list">
           <MoreAboutTech v-for="userTech in userStore.userData.technologes" :key="generateId" :pValue="userTech"/>
@@ -79,7 +79,6 @@ export default {
   },
   setup(){
     const userStore = useUserStore();
-
     return{
       userStore
     }

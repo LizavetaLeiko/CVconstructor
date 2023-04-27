@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <label v-if="label" class="label">{{label}}
-    <input :value="modelValue" @input="setValue(e.target.value)" class="input"  :type="type" :placeholder="placeholder">
+    <input :value="modelValue ? modelValue : value" @input="setValue ? setValue(e) : updateInput(e)" class="input"  :type="type" :placeholder="placeholder">
   </label>
   </div>
 </template>
@@ -13,6 +13,7 @@ export default {
   props: {
     modelValue: [String, String],
     value: [ String, Number, Array],
+    setValue: null,
     type: {
       type: String,
       default: 'text'

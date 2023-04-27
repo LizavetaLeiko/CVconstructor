@@ -15,7 +15,6 @@ export default {
   props:{
     edit: false,
     contact: [],
-    // setValue: () =>{},
   }
 };
 </script>

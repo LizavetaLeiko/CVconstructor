@@ -7,19 +7,19 @@
           <img src="../../public/imgs/defaultPhotoCV.jpg" alt="User photo">
         </div>
         <div class="user__chapter less">
-          <DefaultInput placeholder="My name" v-model="userStore.userData.name" :pValue="userStore.userData.name"/>
+          <DefaultInput placeholder="My name" :value="userStore.userData.name"/>
           <div>
             <h4>Speciality</h4>
-            <DefaultInput placeholder="Frontend dev" v-model="userStore.userData.speciality" :pValue="userStore.userData.speciality"/>
+            <DefaultInput placeholder="Frontend dev"  :value="userStore.userData.speciality"/>
           </div>
           <div>
             <h4>Experience (years)</h4>
-            <DefaultInput placeholder="1" v-model="userStore.userData.experiens" :pValue="userStore.userData.experiens"/>
+            <DefaultInput placeholder="1" :value="userStore.userData.experiens"/>
           </div>
           <div>
             <h4>Contacts</h4>
             <div class="list">
-              <Contacts :edit="true" v-for="contact in contactsAmount" :key="generateId" />
+              <Contacts :edit="true" v-for="contact in contactsAmount" :key="generateId" :contact="contact"/>
             </div>
             <DefaultBtn @click="increaseContactsAmount" class="btn">One more</DefaultBtn>
           </div>
@@ -35,11 +35,11 @@
           </div>
         <div>
           <h3>About me</h3>
-          <DefaultTextarea v-model="userStore.userData.aboutMe" :pValue="userStore.userData.aboutMe"/>
+          <DefaultTextarea v-model="userStore.userData.aboutMe" :value="userStore.userData.aboutMe"/>
         </div>
         <div>
           <h3>Education</h3>
-          <DefaultTextarea v-model="userStore.userData.education" :pValue="userStore.userData.education"/>
+          <DefaultTextarea v-model="userStore.userData.education" :value="userStore.userData.education"/>
         </div>
       </div>
     </div>
@@ -47,14 +47,14 @@
       <div>
         <h3>Work experience</h3>
         <div class="list">
-          <WorkPlaceInfo :edit="true" v-for="work in worksAmount" :key="generateId"/>
+          <WorkPlaceInfo :edit="true" v-for="work in userStore.userData.work" :key="generateId" :place="work" />
         </div>
         <DefaultBtn class="btn" @click="increaseWorksAmount">One more</DefaultBtn>
       </div>
       <div>
         <h3>More about technologes</h3>
         <div class="list">
-          <MoreAboutTech :edit="true"  v-for="tech in techsAmount" :key="generateId"/>
+          <MoreAboutTech :edit="true"  v-for="tech in userStore.userData.technologes" :key="generateId" :tech="tech"/>
         </div>
         <DefaultBtn @click="increaseTechsAmount" class="btn">One more</DefaultBtn>
       </div>
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import { useIsEditableStore } from '~~/store/edit'; 
 import { useUserStore } from '~/store/user';
 import { v4 as uuidv4 } from 'uuid';
 

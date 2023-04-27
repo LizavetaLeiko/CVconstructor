@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <textarea :value="modelValue" @input="updateTextarea" rows="7" :placeholder="placeholder"/>
+    <textarea :value="value" @input="updateTextarea" rows="7" :placeholder="placeholder"/>
   </div>
 </template>
 
@@ -9,16 +9,10 @@
 export default {
   name: 'DefaultInput',
   props: {
-    modelValue: '',
-    value: [ String, Number, Array],
+    value: [ String, String],
     placeholder: {
       type: String,
     },
-  },
-  methods: {
-    updateTextarea(event) {
-      this.$emit('update:modelValue', event.target.value)
-    }
   },
 };
 </script>
@@ -43,6 +37,4 @@ textarea
     border: 1px solid #8f8f8f
   &:focus
     border: 1px solid #DADADA
-<!-- p
-  font-size: 18px  -->
 </style>  
