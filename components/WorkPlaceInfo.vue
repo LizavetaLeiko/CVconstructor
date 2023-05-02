@@ -1,14 +1,14 @@
 <template>
   <div class="place__container" v-if="edit">
-    <DefaultInput placeholder="Company's name" :value="place.company"/>
-    <DefaultInput placeholder="Your role" :value="place.role"/>
+    <DefaultInput placeholder="Company's name" />
+    <DefaultInput placeholder="Your role" />
     <div class="place__container__date">
-      <DefaultInput style="width: 15%;" placeholder="since" :value="place.date.since"/>
+      <DefaultInput style="width: 15%;" placeholder="since" />
       <span>-</span>
-      <DefaultInput style="width: 15%;" placeholder="for" :value="place.date.to"/>
+      <DefaultInput style="width: 15%;" placeholder="for"/>
     </div>
-    <DefaultInput placeholder="Tecnologes" :value="place.techs"/>
-    <DefaultTextarea placeholder="Description" :value="place.desc"/>
+    <DefaultInput placeholder="Tecnologes" />
+    <DefaultTextarea placeholder="Description" />
   </div>
   <div class="place__container" v-else>
     <p>{{place.company}}</p>
@@ -28,8 +28,7 @@ export default {
   name: 'WorkPlaceInfo',
   props:{
     edit: false,
-    place: {
-    }
+    place: null,
   }
 };
 </script>

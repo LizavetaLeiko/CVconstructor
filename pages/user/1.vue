@@ -7,37 +7,37 @@
           <img src="../../public/imgs/defaultPhotoCV.jpg" alt="User photo">
         </div>
         <div class="user__chapter less">
-          <p>{{userStore.userData.name}}</p>
+          <p>{{name}}</p>
           <div>
             <h4>Speciality</h4>
-            <p>{{userStore.userData.speciality}}</p>
+            <p>{{speciality}}</p>
           </div>
           <div>
             <h4>Experience (years)</h4>
-            <p>{{userStore.userData.experiens}}</p>
+            <p>{{experiens}}</p>
           </div>
-          <div v-if="userStore.userData.contacts > 0">
+          <div v-if="contacts.length > 0">
             <h4>Contacts</h4>
             <div class="list">
-              <Contacts v-for="contact in userStore.userData.contacts" :key="generateId" />
+              <Contacts v-for="contact in contacts" :key="generateId" :contact="contact"/>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
       <div class="user__chapter">
         <div>
           <h3>Hard skills</h3>
           <div class="list">
-            <p v-for="(skill, index) in userStore.userData.hardSkills" :key="generateId">{{ userStore.userData.hardSkills[index] }}</p>
+            <p v-for="(skill, index) in userData.hardSkills" :key="generateId">{{ hardSkills[index] }}</p>
           </div>
           </div>
         <div>
           <h3>About me</h3>
-          <p>{{userStore.userData.aboutMe}}</p>
+          <p>{{aboutMe}}</p>
         </div>
-        <div v-if="userStore.userData.education">
+        <div v-if="education">
           <h3>Education</h3>
-          <p>{{userStore.userData.education}}</p>
+          <p>{{education}}</p>
         </div>
       </div>
     </div>
@@ -45,13 +45,13 @@
       <div>
         <h3>Work experience</h3>
         <div class="list">
-          <WorkPlaceInfo v-for="userWork in userStore.userData.work" :key="generateId" :pValue="userWork"/>
+          <WorkPlaceInfo v-for="userWork in work" :key="generateId" :place="userWork"/>
         </div>
       </div>
-      <div v-if="userStore.userData.technologes > 0">
+      <div v-if="technologes.length > 0">
         <h3>More about technologes</h3>
         <div class="list">
-          <MoreAboutTech v-for="userTech in userStore.userData.technologes" :key="generateId" :pValue="userTech"/>
+          <MoreAboutTech v-for="userTech in technologes" :key="generateId" :tech="userTech"/>
         </div>
       </div>
     </div>
@@ -68,7 +68,16 @@ export default {
   name: 'UserId',
   data(){
     return{
-      
+      photo: '',
+      name: '',
+      speciality: '',
+      experiens: '',
+      contacts: [],
+      hardSkills: [],
+      aboutMe: '',
+      education: '',
+      work: [],
+      technologes: []
     }
   },
   methods:{
@@ -76,6 +85,22 @@ export default {
       const id = uuidv4();
       return id
     }
+  },
+  computed:{
+    userData(){
+      this.photo = this.userStore.userData.photo,
+      this.name = this.userStore.userData.name,
+      this.speciality = this.userStore.userData.speciality,
+      this.experiens = this.userStore.userData.experiens,
+      this.contacts = this.userStore.userData.contacts,
+      this.hardSkills = this.userStore.userData.hardSkills,
+      this.aboutMe = this.userStore.userData.aboutMe,
+      this.education = this.userStore.userData.education,
+      this.work = this.userStore.userData.work,
+      this.technologes = this.userStore.userData.technologes
+      return this.userStore.userData
+    },
+
   },
   setup(){
     const userStore = useUserStore();

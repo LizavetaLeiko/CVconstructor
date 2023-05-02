@@ -6,18 +6,21 @@
         <div class="user__img__wrap">
           <img src="../../public/imgs/defaultPhotoCV.jpg" alt="User photo">
         </div>
-        <div class="user__chapter less">
-          <DefaultInput placeholder="My name" :value="userStore.userData.name"/>
-          <div>
+        <div class="user__chapter less" style="margin-top: -10px;">
+          <div class="field">
+            <h4>Name</h4>
+            <DefaultInput  placeholder="My name" :value="userStore.userData.name"/>
+          </div>
+          <div class="field">
             <h4>Speciality</h4>
             <DefaultInput placeholder="Frontend dev"  :value="userStore.userData.speciality"/>
           </div>
-          <div>
+          <div class="field">
             <h4>Experience (years)</h4>
             <DefaultInput placeholder="1" :value="userStore.userData.experiens"/>
           </div>
-          <div>
-            <h4>Contacts</h4>
+          <div class="field">
+            <h4 class="field">Contacts</h4>
             <div class="list">
               <Contacts :edit="true" v-for="contact in contactsAmount" :key="generateId" :contact="contact"/>
             </div>
@@ -33,7 +36,7 @@
           </div>
           <DefaultBtn class="btn" @click="increaseSkillsAmount">One more</DefaultBtn>
           </div>
-        <div>
+        <div class="field">
           <h3>About me</h3>
           <DefaultTextarea v-model="userStore.userData.aboutMe" :value="userStore.userData.aboutMe"/>
         </div>
@@ -43,18 +46,18 @@
         </div>
       </div>
     </div>
-    <div class="user__right user__chapter">
-      <div>
+    <div class="user__right user__chapter" style="margin-top: -10px;">
+      <div class="field">
         <h3>Work experience</h3>
         <div class="list">
-          <WorkPlaceInfo :edit="true" v-for="work in userStore.userData.work" :key="generateId" :place="work" />
+          <WorkPlaceInfo :edit="true" v-for="work in worksAmount" :key="generateId" />
         </div>
         <DefaultBtn class="btn" @click="increaseWorksAmount">One more</DefaultBtn>
       </div>
-      <div>
+      <div class="field">
         <h3>More about technologes</h3>
         <div class="list">
-          <MoreAboutTech :edit="true"  v-for="tech in userStore.userData.technologes" :key="generateId" :tech="tech"/>
+          <MoreAboutTech :edit="true"  v-for="tech in techsAmount" :key="generateId"/>
         </div>
         <DefaultBtn @click="increaseTechsAmount" class="btn">One more</DefaultBtn>
       </div>
@@ -98,7 +101,6 @@ export default {
   },
   setup(){
     const userStore = useUserStore();
-
     return{
       userStore
     }
@@ -119,13 +121,16 @@ h4
   font-size: 20px
   font-weight: 300
   margin-bottom: 7px
+.field
+  padding: 10px 0
+
 .user
   &__container
     padding: 30px 15px 
     display: flex
     justify-content: stretch
     align-items: flex-start
-    gap: 20px
+    gap: 30px
   &__left
     width: 40%
     &__base

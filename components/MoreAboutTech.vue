@@ -1,7 +1,7 @@
 <template>
   <div class="tech__container" v-if="edit">
-    <DefaultInput placeholder="Technology" :value="tech[0]"/>
-    <DefaultTextarea placeholder="Describe yur exrepince with it" :value="tech[1]"/>
+    <DefaultInput placeholder="Technology" :value="tech ? tech[0] : null"/>
+    <DefaultTextarea placeholder="Describe yur exrepince with it" :value="tech ? tech[1] : null"/>
   </div>
   <div class="tech__container" v-else>
     <p>{{ tech[0] }}</p>
@@ -14,7 +14,7 @@ export default {
   name: 'MoreAboutTech',
   props:{
     edit: false,
-    tech: []
+    tech: null,
   }
 };
 </script>

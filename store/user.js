@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export const useUserStore = defineStore('user', {
   state: () => ({ 
+    isLoading: false,
     userBase: {
       email: '',
       id: '',
@@ -46,7 +47,6 @@ export const useUserStore = defineStore('user', {
     async registerUser(login, password) {
       try {
         const response = await axios.post('http://localhost:8000/api/registration', { email: login, password: password })
-        console.log(response)
         this.userBase.email = response.data.email
         this.userBase.id = response.data.id 
         this.userBase.userDataId = response.data.userDataId       
@@ -77,52 +77,24 @@ export const useUserStore = defineStore('user', {
     },
     async getUserQuery(id) {
       try {
+        this.isLoading = true
         const response = await axios.get(`http://localhost:8000/api/user/${id}`)
         this.userBase.email = response.data.email
         this.userBase.id = response.data.id
         this.userBase.password = response.data.password
-        this.userData = response.data.userDataId      
+        this.userData = response.data.userDataId     
+        this.isLoading = false
       } catch (error) {
         return error
       }
     },
     async getUserDataQuery(DataId) {
       try {
-        const response = await axios.get(`http://localhost:8000/api/userdata/${DataId}`)
+        const response = await axios.get(`http://localhost:8000/api/userdata/${DataId}`) 
         this.userData = response.data     
       } catch (error) {
         return error
       }
     },
-    // setPhoto(photo){
-    //   this.state.userData.photo = photo
-    // },
-    // setName(name){
-    //   this.state.userData.name = name
-    // },
-    // setSpeciality(speciality){
-    //   this.state.userData.speciality = speciality
-    // },
-    // setExperiens(experiens){
-    //   this.state.userData.experiens = experiens
-    // },
-    // setContacts(contacts){
-    //   this.state.userData.contacts = contacts
-    // },
-    // setHardSkills(hardSkills){
-    //   this.state.userData.hardSkills = hardSkills
-    // },
-    // setAboutMe(aboutMe){
-    //   this.state.userData.aboutMe = aboutMe
-    // },
-    // setEducation(education){
-    //   this.state.userData.education = education
-    // },
-    // setWork(work){
-    //   this.state.userData.work = work
-    // },
-    // setTechnologes(technologes){
-    //   this.state.userData.technologes = technologes
-    // },
   },
 })

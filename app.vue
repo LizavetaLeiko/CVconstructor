@@ -12,7 +12,6 @@ export default {
   },
   setup(){
     const userStore = useUserStore();
-
     return{
       userStore
     }
