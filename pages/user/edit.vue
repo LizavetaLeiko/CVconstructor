@@ -9,20 +9,20 @@
         <div class="user__chapter less" style="margin-top: -10px;">
           <div class="field">
             <h4>Name</h4>
-            <DefaultInput  placeholder="My name" :value="userStore.userData.name"/>
+            <DefaultInput  placeholder="My name" :value="name"/>
           </div>
           <div class="field">
             <h4>Speciality</h4>
-            <DefaultInput placeholder="Frontend dev"  :value="userStore.userData.speciality"/>
+            <DefaultInput placeholder="Frontend dev"  :value="speciality"/>
           </div>
           <div class="field">
             <h4>Experience (years)</h4>
-            <DefaultInput placeholder="1" :value="userStore.userData.experiens"/>
+            <DefaultInput placeholder="1" :value="experiens"/>
           </div>
           <div class="field">
             <h4 class="field">Contacts</h4>
             <div class="list">
-              <Contacts :edit="true" v-for="contact in contactsAmount" :key="generateId" :contact="contact"/>
+              <Contacts :edit="true" v-for="contact in contacts.length" :key="generateId" :contact="contact"/>
             </div>
             <DefaultBtn @click="increaseContactsAmount" class="btn">One more</DefaultBtn>
           </div>
@@ -32,17 +32,17 @@
         <div>
           <h3>Hard skills</h3>
           <div class="list">
-            <DefaultInput v-for="(skill, index) in skillsAmount" :key="generateId" placeholder="Skill" :value="userStore.userData.hardSkills[index]" />
+            <DefaultInput v-for="(skill, index) in hardSkills.length" :key="generateId" placeholder="Skill" :value="skill" />
           </div>
           <DefaultBtn class="btn" @click="increaseSkillsAmount">One more</DefaultBtn>
           </div>
         <div class="field">
           <h3>About me</h3>
-          <DefaultTextarea v-model="userStore.userData.aboutMe" :value="userStore.userData.aboutMe"/>
+          <DefaultTextarea v-model="aboutMe" :value="aboutMe"/>
         </div>
         <div>
           <h3>Education</h3>
-          <DefaultTextarea v-model="userStore.userData.education" :value="userStore.userData.education"/>
+          <DefaultTextarea v-model="education" :value="education"/>
         </div>
       </div>
     </div>
@@ -50,14 +50,14 @@
       <div class="field">
         <h3>Work experience</h3>
         <div class="list">
-          <WorkPlaceInfo :edit="true" v-for="work in worksAmount" :key="generateId" />
+          <WorkPlaceInfo :edit="true" v-for="userWork in work" :key="generateId" :place="userWork"/>
         </div>
         <DefaultBtn class="btn" @click="increaseWorksAmount">One more</DefaultBtn>
       </div>
       <div class="field">
         <h3>More about technologes</h3>
         <div class="list">
-          <MoreAboutTech :edit="true"  v-for="tech in techsAmount" :key="generateId"/>
+          <MoreAboutTech :edit="true"  v-for="tech in technologes" :key="generateId" :tech="tech"/>
         </div>
         <DefaultBtn @click="increaseTechsAmount" class="btn">One more</DefaultBtn>
       </div>
@@ -75,24 +75,49 @@ export default {
   name: 'UserId',
   data(){
     return{
-      contactsAmount: this.userStore.userData.contacts.length > 0 ? this.userStore.userData.contacts.length : 1,
-      skillsAmount: this.userStore.userData.hardSkills.length > 0 ? this.userStore.userData.hardSkills.length : 1,
-      worksAmount: this.userStore.userData.work.length > 0 ? this.userStore.userData.work.length : 1,
-      techsAmount: this.userStore.userData.technologes.length > 0 ? this.userStore.userData.technologes.length : 1,
+      // contactsAmount: this.userStore.userData.contacts.length > 0 ? this.userStore.userData.contacts.length : 1,
+      // skillsAmount: this.userStore.userData.hardSkills.length > 0 ? this.userStore.userData.hardSkills.length : 1,
+      // worksAmount: this.userStore.userData.work.length > 0 ? this.userStore.userData.work.length : 1,
+      // techsAmount: this.userStore.userData.technologes.length > 0 ? this.userStore.userData.technologes.length : 1,
+      photo: '',
+      name: '',
+      speciality: '',
+      experiens: '',
+      contacts: [],
+      hardSkills: [],
+      aboutMe: '',
+      education: '',
+      work: [],
+      technologes: []
+    }
+  },
+  computed:{
+    userData(){
+      this.photo = this.userStore.userData.photo,
+      this.name = this.userStore.userData.name,
+      this.speciality = this.userStore.userData.speciality,
+      this.experiens = this.userStore.userData.experiens,
+      this.contacts = this.userStore.userData.contacts,
+      this.hardSkills = this.userStore.userData.hardSkills,
+      this.aboutMe = this.userStore.userData.aboutMe,
+      this.education = this.userStore.userData.education,
+      this.work = this.userStore.userData.work,
+      this.technologes = this.userStore.userData.technologes
+      return this.userStore.userData
     }
   },
   methods:{
     increaseContactsAmount(){
-      this.contactsAmount++
+      this.contacts = [...this.contacts, []]
     },
     increaseSkillsAmount(){
-      this.skillsAmount++
+      this.hardSkills = [...this.hardSkills, []]
     },
     increaseWorksAmount(){
-      this.worksAmount++
+      this.work = [...this.work, {company: '', role: '', date:{ since: '',to: ''},techs: '', desc: ""}]
     },
     increaseTechsAmount(){
-      this.techsAmount++
+      this.technologes = [...this.technologes, []]
     },
     generateId() {
       const id = uuidv4();
