@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <label class="label">{{label}}
-    <input :value="value" class="input"  :type="type" :placeholder="placeholder">
+    <input :value="modelValue" class="input"  :type="type" :placeholder="placeholder">
   </label>
   </div>
 </template>

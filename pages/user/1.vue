@@ -7,17 +7,17 @@
           <img src="../../public/imgs/defaultPhotoCV.jpg" alt="User photo">
         </div>
         <div class="user__chapter less">
-          <p>{{name}}</p>
+          <p class="name">{{name}}</p>
           <div>
-            <h4>Speciality</h4>
-            <p>{{speciality}}</p>
+            <p class="value" style="margin-top: -13px;">{{speciality}}</p>
           </div>
-          <div>
-            <h4>Experience (years)</h4>
-            <p>{{experiens}}</p>
+          <div class="user__chapter__experience">
+            <h4 style="margin-bottom: 0;">Experience</h4>
+            <p>-</p>
+            <p class="value">{{experiens}}</p>
           </div>
           <div v-if="contacts.length > 0">
-            <h4>Contacts</h4>
+            <h4 style="margin-bottom: 10px;">Contacts</h4>
             <div class="list">
               <Contacts v-for="contact in contacts" :key="generateId" :contact="contact"/>
             </div>
@@ -27,7 +27,7 @@
       <div class="user__chapter">
         <div>
           <h3>Hard skills</h3>
-          <div class="list">
+          <div class="list grid">
             <p v-for="(skill, index) in userData.hardSkills" :key="generateId">{{ hardSkills[index] }}</p>
           </div>
           </div>
@@ -120,10 +120,16 @@ h3
   font-size: 22px
   font-weight: 400
   margin-bottom: 15px
+.value
+  font-size: 22px
+  font-weight: 400
 h4
   font-size: 20px
-  font-weight: 300
+  font-weight: 400
   margin-bottom: 7px
+.name
+  font-size: 30px
+  font-weight: 400
 .user
   &__container
     padding: 30px 15px 
@@ -140,24 +146,32 @@ h4
       align-items: flex-start
       margin-bottom: 30px
   &__chapter
-    gap: 20px
+    gap: 30px
     display: flex
     justify-content: start
     flex-direction: column
     align-items: stretch
+    &__experience
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      gap: 10px
   &__right
     width: 60%
 .less
-  gap: 10px
+  gap: 20px
 .btn
   max-width: 140px
   padding: 5px
   font-size: 16px
   margin-top: 15px
 .list
-  gap: 15px
+  gap: 10px
   display: flex
   justify-content: start
   flex-direction: column
   align-items: stretch
+.grid
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr 1fr
 </style>

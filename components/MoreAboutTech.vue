@@ -4,8 +4,8 @@
     <DefaultTextarea placeholder="Describe yur exrepince with it" :value="tech ? tech[1] : null"/>
   </div>
   <div class="tech__container" v-else>
-    <p>{{ tech[0] }}</p>
-    <p>{{ tech[1] }}</p>
+    <p class="tech__title">{{ tech[0] }}</p>
+    <p class="tech__desc">{{ tech[1] }}</p>
   </div>
 </template>
 
@@ -20,13 +20,20 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.tech__container
-  gap: 10px
-  display: flex
-  justify-content: start
-  flex-direction: column
-  align-items: stretch
-  padding: 10px 0
-  border-top: 1px #fff solid
-  border-bottom: 1px #fff solid
+.tech
+  &__container
+    gap: 10px
+    display: flex
+    justify-content: start
+    flex-direction: column
+    align-items: stretch
+    padding: 15px 0
+    border-top: 1px #fff solid
+    border-bottom: 1px #fff solid
+  &__title
+    font-size: 20px
+    font-weight: 400
+  &__desc
+    font-size: 18px
+    font-weight: 300
 </style>
