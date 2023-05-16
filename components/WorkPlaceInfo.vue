@@ -43,11 +43,10 @@ export default {
 .place
   &__container
     padding: 10px 0
-    border-top: 1px #fff solid
-    border-bottom: 1px #fff solid
-    gap: 10px
+    border-top: 1px #000 solid
+    border-bottom: 1px #000 solid
     display: flex
-    justify-content: start
+    justify-content: flex-start
     flex-direction: column
     align-items: stretch
   &__name
@@ -59,14 +58,14 @@ export default {
   &__date
     gap: 7px
     display: flex
-    justify-content: start
+    justify-content: flex-start
     align-items: center
   &__chapter
-    padding: 10px 0
+    margin: 10px 0 5px 0
     &__title
       font-size: 20px
       font-weight: 400
-      margin-bottom: 10px
+      margin-bottom: 5px
     &__value
       font-size: 18px
       font-weight: 300

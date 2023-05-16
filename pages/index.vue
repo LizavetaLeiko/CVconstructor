@@ -8,7 +8,12 @@
         <DefaultInput type="password" label="Password" forForm=true v-model="password"/>
       </div>
       <div>{{ isEditable }}</div>
-      <DefaultBtn @click.prevent="isSignUp ? userStore.registerUser(email, password) : userStore.loginUser(email, password)">{{isSignUp ? 'Sign up' : 'Sign in'}}</DefaultBtn>
+      <DefaultBtn style="margin: 0 auto;" v-if="isSignUp" @click.prevent="registerUser(email, password)">
+        Sign up
+      </DefaultBtn>
+      <DefaultBtn style="margin: 0 auto;" v-else @click.prevent="loginUser(email, password)">
+        Sign in
+      </DefaultBtn>
     </form>
     <div class="signin__bottom">
       <p>{{isSignUp ? "Already have an account?" :  "Don't have an account yet?"}}</p>
@@ -19,6 +24,7 @@
 
 <script>
 import { useUserStore } from '~/store/user';
+import axios from 'axios';
 
 export default {
   name: 'Index',
@@ -31,14 +37,43 @@ export default {
   },
   setup(){
     const userStore = useUserStore();
+    const router = useRouter();
     return{
-      userStore
+      userStore,
+      router
     }
   },
   methods:{
     toggleIsSignUp(){
       this.isSignUp = !this.isSignUp
-    }
+    },
+    async loginUser(email, password){
+      console.log(email)
+      try {
+        this.userStore.isLoading = true
+        const response = await axios.post('http://localhost:8000/api/login', { email: email, password: password  })
+        this.userStore.setUser(response.data.user)
+        localStorage.setItem('token', response.data.accessToken);
+        this.userStore.isLoading = false
+        this.userStore.isLogined = true
+        this.router.push({ path: `/user/${response.data.user.id}` })
+      } catch (error) {
+        return error
+      }
+    },
+    async registerUser(email, password) {
+      try {
+        this.userStore.isLoading = true
+        const response = await axios.post('http://localhost:8000/api/registration', { email: email, password: password })
+        this.userStore.setUser(response.data.user)
+        localStorage.setItem('token', response.data.accessToken);
+        this.userStore.isLoading = false
+        this.userStore.isLogined = true
+        this.router.push({ path: `/user/${response.data.user.id}/edit` })
+      } catch (error) {
+        return error
+      }
+    },
   },
 };
 </script>
@@ -65,6 +100,12 @@ export default {
       display: flex
       flex-direction: column
       gap: 20px
+  &__link
+    width: 100%
+    height: 100%
+    color: #fff
+    text-decoration: none
+    padding: 15px 30px
   &__bottom
     p
       font-size: 20px
@@ -73,7 +114,7 @@ export default {
       padding: 10px 5px 5px
       background: transparent
       border: none
-      color: #fff
+      color: #000
       font-size: 18px
-      border-bottom: .3px #fff solid
+      border-bottom: .3px #000 solid
 </style>

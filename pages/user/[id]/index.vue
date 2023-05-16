@@ -4,7 +4,7 @@
     <div class="user__left">
       <div class="user__left__base">
         <div class="user__img__wrap">
-          <img src="../../public/imgs/defaultPhotoCV.jpg" alt="User photo">
+          <img src="../../../public/imgs/defaultPhotoCV.svg" alt="User photo">
         </div>
         <div class="user__chapter less">
           <p class="name">{{name}}</p>
@@ -86,6 +86,9 @@ export default {
       return id
     }
   },
+  mounted(){
+    this.userStore.getUserQuery(this.$route.params.id);
+  },
   computed:{
     userData(){
       this.photo = this.userStore.userData.photo,
@@ -148,7 +151,7 @@ h4
   &__chapter
     gap: 30px
     display: flex
-    justify-content: start
+    justify-content: flex-start
     flex-direction: column
     align-items: stretch
     &__experience
@@ -168,10 +171,8 @@ h4
 .list
   gap: 10px
   display: flex
-  justify-content: start
+  justify-content: flex-start
   flex-direction: column
   align-items: stretch
-.grid
-  display: grid
-  grid-template-columns: 1fr 1fr 1fr 1fr
+
 </style>

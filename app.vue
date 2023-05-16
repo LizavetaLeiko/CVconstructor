@@ -7,15 +7,15 @@
 import { useUserStore } from '~/store/user';
 export default {
   name: 'app',
-  mounted(){
-    this.userStore.getUserQuery('643e984d5327b8e13d8017ec');
-  },
-  setup(){
-    const userStore = useUserStore();
-    return{
-      userStore
-    }
-  }
+  // mounted(){
+  //   this.userStore.getUserQuery('643e984d5327b8e13d8017ec');
+  // },
+  // setup(){
+  //   const userStore = useUserStore();
+  //   return{
+  //     userStore
+  //   }
+  // }
 };
 </script>
 <style>
@@ -25,9 +25,9 @@ export default {
   margin: 0;
 }
 .app{
-  background-color: black;
+  background-color: #fff;
   min-height: 100vh;
-  color: #fff;
+  color: #000;
   font-family: 'Lato', sans-serif;
 }
 

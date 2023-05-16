@@ -1,13 +1,13 @@
 <template>
     <header>
-      <div>
-        <BtnWithoutBg @click="isEditableStore.changeIsEditable">Edit resume</BtnWithoutBg>
-      </div>
+      <NuxtLink :to="`/user/${$route.params.id}/edit`">
+        <BtnWithoutBg>Edit resume</BtnWithoutBg>
+      </NuxtLink>
       <DefaultBtn class="btn">Logout</DefaultBtn>
     </header>
     <slot/>
 </template>
-
+·
 <script>
 
 import { useIsEditableStore } from '~~/store/edit';
@@ -15,11 +15,11 @@ import { useIsEditableStore } from '~~/store/edit';
 export default {
   name: 'LayoutPages',
   setup(){
-    const isEditableStore = useIsEditableStore();
+    const router = useRouter();
     return{
-      isEditableStore
+      router
     }
-  }
+  },
 }
 </script>
 
@@ -29,7 +29,8 @@ header
   justify-content: space-between
   align-items: center
   padding: 15px
-  border-bottom: .5px #fff solid
+  border-bottom: .5px #000 solid
+  width: 100%
   div
     display: flex
     gap: 20px

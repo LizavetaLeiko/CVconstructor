@@ -24,12 +24,12 @@ export default {
   &__container
     gap: 10px
     display: flex
-    justify-content: start
+    justify-content: flex-start
     flex-direction: column
     align-items: stretch
     padding: 15px 0
-    border-top: 1px #fff solid
-    border-bottom: 1px #fff solid
+    border-top: 1px #000 solid
+    border-bottom: 1px #000 solid
   &__title
     font-size: 20px
     font-weight: 400

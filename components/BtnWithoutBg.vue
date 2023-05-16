@@ -16,9 +16,10 @@ export default {
   padding: 10px 5px 5px
   background: transparent
   border: none
-  color: #fff
+  color: #000
   font-size: 18px
   border: none
+  border-bottom: .3px #fff solid
   &:hover
-    border-bottom: .3px #fff solid
+    border-bottom: .3px #000 solid
 </style>

@@ -14,13 +14,16 @@ export default {
 .btn 
   cursor: pointer
   font-size: 18px
-  max-width: 200px
+  max-width: 150px
   width: 100%
-  padding: 15px
-  background: #000
-  border: 1px solid #fff
-  color: #fff
+  background: #fff
+  border: 1px solid #000
+  padding: 5px
+  color: #000
   transform: scale(1) 
+  display: flex
+  align-items: center
+  justify-content: center 
   &:hover
     transform: scale(1.05) 
     transition: all 0.3s ease-out

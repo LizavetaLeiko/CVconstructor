@@ -4,6 +4,7 @@ import axios from 'axios'
 export const useUserStore = defineStore('user', {
   state: () => ({ 
     isLoading: false,
+    isLogined: false,
     userBase: {
       email: '',
       id: '',
@@ -17,25 +18,12 @@ export const useUserStore = defineStore('user', {
       speciality: '',
       experiens: '',
       contacts: [
-        // ['CV', 'http://localhost:3000/user/1']
         ],
       hardSkills: [],
       aboutMe: '',
       education: '',
-      work: [
-        // {company: 'freelance', 
-        // role: 'frontend', 
-        // date:{ 
-        //   since: '2022',
-        //   to: 'now'
-        //   },
-        // techs: 'git, javascript',
-        // desc: "Since February 2022 I've been studying  FrontEnd courses and I am also have been studying on my own. This occupation has become my main hobby and goal.Previously  I worked as a sales manager, so I'm very stress-resistant and sociable. I graduated from school with a gold medal and then I was working and studing in the same time, so I am not afraid of a many tasks and mental work! I have experience of communication with native English speakers and work to improve my English. I continue to develop my hard skills by udemy courses and documentations, and also practice a lot. Now I'm actively learning Node.js, for example."
-        // }
-      ],
-      technologes: [
-        // ['git', 'use it always'], ['react', 'with next']
-      ],
+      work: [],
+      technologes: [],
       __v: 0,
     }
   }),
@@ -44,35 +32,24 @@ export const useUserStore = defineStore('user', {
     getUserData: (state) => state.userData,
   },
   actions: {
-    async registerUser(login, password) {
-      try {
-        const response = await axios.post('http://localhost:8000/api/registration', { email: login, password: password })
-        this.userBase.email = response.data.email
-        this.userBase.id = response.data.id 
-        this.userBase.userDataId = response.data.userDataId       
-        localStorage.setItem('token', response.data.accessToken);
-      } catch (error) {
-        return error
-      }
-    },
-    async loginUser(login, password) {
-      try {
-        const response = await axios.post('http://localhost:8000/api/login', { email: login, password: password  })
-        this.userBase.email = response.data.email
-        this.userBase.id = response.data.id
-        this.userData = response.data.userDataId      
-        localStorage.setItem('token', response.data.accessToken);
-      } catch (error) {
-        return error
-      }
-    },
     async refresh () {
       try {
         const responce = await axios.get('http://localhost:8000/api/refresh');
         localStorage.setItem('token', responce.data.accessToken);
+        this.isLogined = true
         return responce.data;
       } catch (error) {
         return error;
+      }
+    },
+    setUser(data) {
+      try {
+        this.userBase.email = data.email
+        this.userBase.id = data.id
+        this.userBase.password = data.password
+        this.userData = data.userDataId     
+      } catch (error) {
+        return error
       }
     },
     async getUserQuery(id) {
@@ -91,6 +68,14 @@ export const useUserStore = defineStore('user', {
     async getUserDataQuery(DataId) {
       try {
         const response = await axios.get(`http://localhost:8000/api/userdata/${DataId}`) 
+        this.userData = response.data     
+      } catch (error) {
+        return error
+      }
+    },
+    async setUserDataQuery(info) {
+      try {
+        const response = await axios.put(`http://localhost:8000/api/userdata`, info) 
         this.userData = response.data     
       } catch (error) {
         return error

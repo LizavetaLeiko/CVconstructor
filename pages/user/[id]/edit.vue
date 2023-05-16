@@ -75,10 +75,6 @@ export default {
   name: 'UserId',
   data(){
     return{
-      // contactsAmount: this.userStore.userData.contacts.length > 0 ? this.userStore.userData.contacts.length : 1,
-      // skillsAmount: this.userStore.userData.hardSkills.length > 0 ? this.userStore.userData.hardSkills.length : 1,
-      // worksAmount: this.userStore.userData.work.length > 0 ? this.userStore.userData.work.length : 1,
-      // techsAmount: this.userStore.userData.technologes.length > 0 ? this.userStore.userData.technologes.length : 1,
       photo: '',
       name: '',
       speciality: '',
@@ -153,7 +149,7 @@ h4
   &__container
     padding: 30px 15px 
     display: flex
-    justify-content: stretch
+    justify-content: flex-stretch
     align-items: flex-start
     gap: 30px
   &__left
@@ -167,7 +163,7 @@ h4
   &__chapter
     gap: 20px
     display: flex
-    justify-content: start
+    justify-content: flex-start
     flex-direction: column
     align-items: stretch
   &__right
@@ -182,7 +178,7 @@ h4
 .list
   gap: 15px
   display: flex
-  justify-content: start
+  justify-content: flex-start
   flex-direction: column
   align-items: stretch
 </style>
