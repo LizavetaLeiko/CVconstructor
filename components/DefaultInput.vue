@@ -12,7 +12,6 @@ export default {
   name: 'DefaultInput',
   props: {
     modelValue: [String, String],
-    value: [ String, Number, Array],
     type: {
       type: String,
       default: 'text'

@@ -1,19 +1,35 @@
 <template>
     <header>
-      <NuxtLink :to="`/user/${$route.params.id}/edit`">
-        <BtnWithoutBg>Edit resume</BtnWithoutBg>
-      </NuxtLink>
+      <div v-if="!isEdit">
+        <NuxtLink :to="`/user/${$route.params.id}/edit`">
+          <BtnWithoutBg>Edit resume</BtnWithoutBg>
+        </NuxtLink>
+      </div>
+      <div v-else>
+        <NuxtLink :to="`/user/${$route.params.id}`">
+          <BtnWithoutBg>Save</BtnWithoutBg>
+        </NuxtLink>
+      </div>
       <DefaultBtn class="btn">Logout</DefaultBtn>
     </header>
     <slot/>
 </template>
 ·
 <script>
-
-import { useIsEditableStore } from '~~/store/edit';
-
 export default {
   name: 'LayoutPages',
+  data(){
+    return{
+      isEdit: false,
+    }
+  },
+  mounted(){
+    if (this.$route.fullPath.split('').slice(-4).join('') === 'edit'){
+      this.isEdit = true
+    } else {
+      this.isEdit = false
+    }
+  },
   setup(){
     const router = useRouter();
     return{

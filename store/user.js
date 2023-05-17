@@ -17,13 +17,21 @@ export const useUserStore = defineStore('user', {
       name: '',
       speciality: '',
       experiens: '',
-      contacts: [
-        ],
-      hardSkills: [],
+      contacts: [['','']],
+      hardSkills: [''],
       aboutMe: '',
       education: '',
-      work: [],
-      technologes: [],
+      work: [
+        {company:" ",
+        role:" ",
+        date:{
+          since:" ",
+          to:" "
+          },
+        techs:" ",
+        desc:" "
+      }],
+      technologes: [['',' ']],
       __v: 0,
     }
   }),

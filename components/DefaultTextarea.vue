@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <textarea :value="value" @input="updateTextarea" rows="7" :placeholder="placeholder"/>
+    <textarea :value="modelValue" @input="updateTextarea" rows='15' :placeholder="placeholder"/>
   </div>
 </template>
 
@@ -9,10 +9,15 @@
 export default {
   name: 'DefaultInput',
   props: {
-    value: [ String, String],
+    modelValue: [ String, String],
     placeholder: {
       type: String,
     },
+  },
+  methods: {
+    updateTextarea(event) {
+      this.$emit('update:modelValue', event.target.value)
+    }
   },
 };
 </script>

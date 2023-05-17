@@ -1,14 +1,14 @@
 <template>
-  <div class="place__container" v-if="edit">
-    <DefaultInput placeholder="Company's name" />
-    <DefaultInput placeholder="Your role" />
+  <div class="place__container edit" v-if="edit">
+    <DefaultInput placeholder="Company's name" v-model="place.company"/>
+    <DefaultInput placeholder="Your role" v-model="place.role"/>
     <div class="place__date">
-      <DefaultInput style="width: 15%;" placeholder="since" />
+      <DefaultInput style="width: 15%;" placeholder="since" v-model="place.date.since"/>
       <span>-</span>
-      <DefaultInput style="width: 15%;" placeholder="for"/>
+      <DefaultInput style="width: 15%;" placeholder="for" v-model="place.date.to"/>
     </div>
-    <DefaultInput placeholder="Tecnologes" />
-    <DefaultTextarea placeholder="Description" />
+    <DefaultInput placeholder="Tecnologes" v-model="place.techs"/>
+    <DefaultTextarea placeholder="Description" v-model="place.desc"/>
   </div>
   <div class="place__container" v-else>
     <p class="place__name">{{place.company}}</p>
@@ -69,5 +69,6 @@ export default {
     &__value
       font-size: 18px
       font-weight: 300
-
+.edit
+  gap: 10px
 </style>

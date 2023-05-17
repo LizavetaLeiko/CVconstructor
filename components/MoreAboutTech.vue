@@ -1,7 +1,7 @@
 <template>
   <div class="tech__container" v-if="edit">
-    <DefaultInput placeholder="Technology" :value="tech ? tech[0] : null"/>
-    <DefaultTextarea placeholder="Describe yur exrepince with it" :value="tech ? tech[1] : null"/>
+    <DefaultInput placeholder="Technology" v-model="tech[0]"/>
+    <DefaultTextarea placeholder="Describe yur exrepince with it" v-model="tech[1]"/>
   </div>
   <div class="tech__container" v-else>
     <p class="tech__title">{{ tech[0] }}</p>

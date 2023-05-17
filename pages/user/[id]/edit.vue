@@ -4,25 +4,25 @@
     <div class="user__left">
       <div class="user__left__base">
         <div class="user__img__wrap">
-          <img src="../../public/imgs/defaultPhotoCV.jpg" alt="User photo">
+          <img src="../../../public/imgs/defaultPhotoCV.svg" alt="User photo">
         </div>
         <div class="user__chapter less" style="margin-top: -10px;">
           <div class="field">
             <h4>Name</h4>
-            <DefaultInput  placeholder="My name" :value="name"/>
+            <DefaultInput  placeholder="My name" v-model="name"/>
           </div>
           <div class="field">
             <h4>Speciality</h4>
-            <DefaultInput placeholder="Frontend dev"  :value="speciality"/>
+            <DefaultInput placeholder="Frontend dev" v-model="speciality"/>
           </div>
           <div class="field">
             <h4>Experience (years)</h4>
-            <DefaultInput placeholder="1" :value="experiens"/>
+            <DefaultInput placeholder="1" v-model="experiens"/>
           </div>
           <div class="field">
             <h4 class="field">Contacts</h4>
             <div class="list">
-              <Contacts :edit="true" v-for="contact in contacts.length" :key="generateId" :contact="contact"/>
+              <Contacts :edit="true" v-for="(contact, index) in contacts.length" :key="generateId" :contact="contacts[index]"/>
             </div>
             <DefaultBtn @click="increaseContactsAmount" class="btn">One more</DefaultBtn>
           </div>
@@ -32,17 +32,17 @@
         <div>
           <h3>Hard skills</h3>
           <div class="list">
-            <DefaultInput v-for="(skill, index) in hardSkills.length" :key="generateId" placeholder="Skill" :value="skill" />
+            <DefaultInput  v-for="(skill, index) in hardSkills" :key="generateId" :placeholder="placeholder" style="width: 30%;" v-model="hardSkills[index]"/>
           </div>
           <DefaultBtn class="btn" @click="increaseSkillsAmount">One more</DefaultBtn>
           </div>
         <div class="field">
           <h3>About me</h3>
-          <DefaultTextarea v-model="aboutMe" :value="aboutMe"/>
+          <DefaultTextarea v-model="aboutMe"/>
         </div>
         <div>
           <h3>Education</h3>
-          <DefaultTextarea v-model="education" :value="education"/>
+          <DefaultTextarea v-model="education"/>
         </div>
       </div>
     </div>
@@ -84,7 +84,7 @@ export default {
       aboutMe: '',
       education: '',
       work: [],
-      technologes: []
+      technologes: [],
     }
   },
   computed:{
@@ -102,8 +102,12 @@ export default {
       return this.userStore.userData
     }
   },
+  mounted(){
+    this.userStore.getUserQuery(this.$route.params.id);
+  },
   methods:{
     increaseContactsAmount(){
+      console.log('name',this.name)
       this.contacts = [...this.contacts, []]
     },
     increaseSkillsAmount(){
@@ -166,6 +170,7 @@ h4
     justify-content: flex-start
     flex-direction: column
     align-items: stretch
+    width: 100%
   &__right
     width: 60%
 .less

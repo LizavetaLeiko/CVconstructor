@@ -1,7 +1,7 @@
 <template>
   <div v-if="edit">
-    <DefaultInput placeholder="Where" style="width: 30%;" :value="contact[0]"/>
-    <DefaultInput placeholder="Adress (phone number, nickname etc. " :value="contact[0]" />
+    <DefaultInput placeholder="Where" style="width: 30%;" v-model="contact[0]"/>
+    <DefaultInput placeholder="Adress (phone number, nickname etc.) " v-model="contact[1]" />
   </div>
   <div v-else class="contacts__item">
     <span>{{contact[0]}}</span>
