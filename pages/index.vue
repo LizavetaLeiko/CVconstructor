@@ -24,7 +24,7 @@
 
 <script>
 import { useUserStore } from '~/store/user';
-import axios from 'axios';
+import { backend } from '~~/axios/axios';
 
 export default {
   name: 'Index',
@@ -51,11 +51,11 @@ export default {
       console.log(email)
       try {
         this.userStore.isLoading = true
-        const response = await axios.post('http://localhost:8000/api/login', { email: email, password: password  })
+        const response = await backend.post('/login', { email: email, password: password  })
         this.userStore.setUser(response.data.user)
         localStorage.setItem('token', response.data.accessToken);
         this.userStore.isLoading = false
-        this.userStore.isLogined = true
+        // this.userStore.isLogined = true
         this.router.push({ path: `/user/${response.data.user.id}` })
       } catch (error) {
         return error
@@ -64,11 +64,11 @@ export default {
     async registerUser(email, password) {
       try {
         this.userStore.isLoading = true
-        const response = await axios.post('http://localhost:8000/api/registration', { email: email, password: password })
+        const response = await backend.post('/registration', { email: email, password: password })
         this.userStore.setUser(response.data.user)
         localStorage.setItem('token', response.data.accessToken);
         this.userStore.isLoading = false
-        this.userStore.isLogined = true
+        // this.userStore.isLogined = true
         this.router.push({ path: `/user/${response.data.user.id}/edit` })
       } catch (error) {
         return error

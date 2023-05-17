@@ -70,7 +70,6 @@
 import { useUserStore } from '~/store/user';
 import { v4 as uuidv4 } from 'uuid';
 
-
 export default {
   name: 'UserId',
   data(){
@@ -134,6 +133,7 @@ export default {
 
 definePageMeta({
     layout: "pages",
+    middleware: 'auth'
   })
 </script>
 

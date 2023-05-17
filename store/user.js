@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
+import { backend } from '~~/axios/axios';
 
 export const useUserStore = defineStore('user', {
   state: () => ({ 
@@ -8,7 +8,6 @@ export const useUserStore = defineStore('user', {
     userBase: {
       email: '',
       id: '',
-      password: '',
       userDataId: '',
     },
     userData:{
@@ -36,17 +35,20 @@ export const useUserStore = defineStore('user', {
     }
   }),
   getters: {
-    getUserBase: (state) => state.userBase,
-    getUserData: (state) => state.userData,
+    getIsLogined: (state) => state.isLogined,
   },
   actions: {
     async refresh () {
       try {
-        const responce = await axios.get('http://localhost:8000/api/refresh');
+        const responce = await backend.get('/refresh');
         localStorage.setItem('token', responce.data.accessToken);
-        this.isLogined = true
+        this.userBase.email = responce.data.user.email
+        this.userBase.id = responce.data.user.id
+        this.userData = responce.data.user.userDataId  
+        // this.isLogined = true
         return responce.data;
       } catch (error) {
+        this.isLogined = false
         return error;
       }
     },
@@ -54,7 +56,6 @@ export const useUserStore = defineStore('user', {
       try {
         this.userBase.email = data.email
         this.userBase.id = data.id
-        this.userBase.password = data.password
         this.userData = data.userDataId     
       } catch (error) {
         return error
@@ -63,10 +64,9 @@ export const useUserStore = defineStore('user', {
     async getUserQuery(id) {
       try {
         this.isLoading = true
-        const response = await axios.get(`http://localhost:8000/api/user/${id}`)
+        const response = await backend.get(`/user/${id}`)
         this.userBase.email = response.data.email
         this.userBase.id = response.data.id
-        this.userBase.password = response.data.password
         this.userData = response.data.userDataId     
         this.isLoading = false
       } catch (error) {
@@ -75,7 +75,7 @@ export const useUserStore = defineStore('user', {
     },
     async getUserDataQuery(DataId) {
       try {
-        const response = await axios.get(`http://localhost:8000/api/userdata/${DataId}`) 
+        const response = await backend.get(`/userdata/${DataId}`) 
         this.userData = response.data     
       } catch (error) {
         return error
@@ -83,7 +83,7 @@ export const useUserStore = defineStore('user', {
     },
     async setUserDataQuery(info) {
       try {
-        const response = await axios.put(`http://localhost:8000/api/userdata`, info) 
+        const response = await backend.put(`/userdata`, info) 
         this.userData = response.data     
       } catch (error) {
         return error
