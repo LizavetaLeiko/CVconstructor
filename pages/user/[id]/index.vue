@@ -115,6 +115,7 @@ export default {
 
 definePageMeta({
     layout: "pages",
+    middleware: "refresh"
   })
 </script>
 

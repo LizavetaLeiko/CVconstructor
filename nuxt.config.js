@@ -1,3 +1,5 @@
+import { useUserStore } from "./store/user";
+
 export default defineNuxtConfig({
   components: true,
   modules: [

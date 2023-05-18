@@ -55,7 +55,7 @@ export default {
         this.userStore.setUser(response.data.user)
         localStorage.setItem('token', response.data.accessToken);
         this.userStore.isLoading = false
-        // this.userStore.isLogined = true
+        this.userStore.isLogined = true
         this.router.push({ path: `/user/${response.data.user.id}` })
       } catch (error) {
         return error
@@ -68,7 +68,7 @@ export default {
         this.userStore.setUser(response.data.user)
         localStorage.setItem('token', response.data.accessToken);
         this.userStore.isLoading = false
-        // this.userStore.isLogined = true
+        this.userStore.isLogined = true
         this.router.push({ path: `/user/${response.data.user.id}/edit` })
       } catch (error) {
         return error
@@ -76,6 +76,9 @@ export default {
     },
   },
 };
+// definePageMeta({
+//     middleware: "refresh"
+//   })
 </script>
 
 <style lang="sass" scoped>

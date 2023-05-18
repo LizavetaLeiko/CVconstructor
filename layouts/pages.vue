@@ -10,12 +10,16 @@
           <BtnWithoutBg>Save</BtnWithoutBg>
         </NuxtLink>
       </div>
-      <DefaultBtn class="btn">Logout</DefaultBtn>
+      <DefaultBtn @click="logout" class="btn">Logout</DefaultBtn>
     </header>
     <slot/>
 </template>
 ·
 <script>
+import { useUserStore } from '~~/store/user'
+import { backend } from '~~/axios/axios'
+import { userBase, userData} from '~/store/defaultState'
+
 export default {
   name: 'LayoutPages',
   data(){
@@ -31,11 +35,29 @@ export default {
     }
   },
   setup(){
+    const userStore = useUserStore()
     const router = useRouter();
     return{
-      router
+      router,
+      userStore
     }
   },
+  methods:{
+    async logout () {
+      try {
+        const responce = await backend.post('/logout');
+        localStorage.removeItem('token');
+        this.userStore.userBase = userBase;
+        this.userStore.userData = userData;
+        this.userStore.isLogined = false;
+        this.userStore.isLoading = false;
+        this.router.push({ path: `/` })
+        return responce.data;
+      } catch (error) {
+        return error;
+      }
+    },
+  }
 }
 </script>
 

@@ -1,38 +1,13 @@
 import { defineStore } from 'pinia'
 import { backend } from '~~/axios/axios';
+import { userBase, userData} from './defaultState';
 
 export const useUserStore = defineStore('user', {
-  state: () => ({ 
+  state: () => ({
     isLoading: false,
     isLogined: false,
-    userBase: {
-      email: '',
-      id: '',
-      userDataId: '',
-    },
-    userData:{
-      _id: '',
-      photo: '',
-      name: '',
-      speciality: '',
-      experiens: '',
-      contacts: [['','']],
-      hardSkills: [''],
-      aboutMe: '',
-      education: '',
-      work: [
-        {company:" ",
-        role:" ",
-        date:{
-          since:" ",
-          to:" "
-          },
-        techs:" ",
-        desc:" "
-      }],
-      technologes: [['',' ']],
-      __v: 0,
-    }
+    userBase: userBase,
+    userData: userData
   }),
   getters: {
     getIsLogined: (state) => state.isLogined,
@@ -40,12 +15,13 @@ export const useUserStore = defineStore('user', {
   actions: {
     async refresh () {
       try {
+        console.log('refresh')
         const responce = await backend.get('/refresh');
         localStorage.setItem('token', responce.data.accessToken);
         this.userBase.email = responce.data.user.email
         this.userBase.id = responce.data.user.id
         this.userData = responce.data.user.userDataId  
-        // this.isLogined = true
+        this.isLogined = true
         return responce.data;
       } catch (error) {
         this.isLogined = false
