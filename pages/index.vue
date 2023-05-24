@@ -76,9 +76,6 @@ export default {
     },
   },
 };
-// definePageMeta({
-//     middleware: "refresh"
-//   })
 </script>
 
 <style lang="sass" scoped>

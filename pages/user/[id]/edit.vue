@@ -101,6 +101,38 @@ export default {
       return this.userStore.userData
     }
   },
+  watch: {
+    name(value) {
+      this.userStore.setName(value)
+    },
+    photo(value) {
+      this.userStore.setPhoto(value)
+    },
+    speciality(value) {
+      this.userStore.setSpeciality(value)
+    },
+    experiens(value) {
+      this.userStore.setExperiens(value)
+    },
+    contacts(value) {
+      this.userStore.setContacts(value)
+    },
+    hardSkills(value) {
+      this.userStore.setHardSkills(value)
+    },
+    aboutMe(value) {
+      this.userStore.setAboutMe(value)
+    },
+    education(value) {
+      this.userStore.setEducation(value)
+    },
+    work(value) {
+      this.userStore.setWork(value)
+    },
+    technologes(value) {
+      this.userStore.setTechnologes(value)
+    },
+  },
   mounted(){
     this.userStore.getUserQuery(this.$route.params.id);
   },

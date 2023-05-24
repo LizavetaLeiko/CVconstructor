@@ -13,6 +13,36 @@ export const useUserStore = defineStore('user', {
     getIsLogined: (state) => state.isLogined,
   },
   actions: {
+    setPhoto(newValue) {
+      this.userData.photo = newValue;
+    },
+    setName(newValue) {
+      this.userData.name = newValue;
+    },
+    setSpeciality(newValue) {
+      this.userData.speciality = newValue;
+    },
+    setContacts(newValue) {
+      this.userData.contacts = newValue;
+    },
+    setExperiens(newValue) {
+      this.userData.experiens = newValue;
+    },
+    setHardSkills(newValue) {
+      this.userData.hardSkills = newValue;
+    },
+    setAboutMe(newValue) {
+      this.userData.aboutMe = newValue;
+    },
+    setEducation(newValue) {
+      this.userData.education = newValue;
+    },
+    setWork(newValue) {
+      this.userData.work = newValue;
+    },
+    setTechnologes(newValue) {
+      this.userData.technologes = newValue;
+    },
     async refresh () {
       try {
         console.log('refresh')
@@ -57,9 +87,9 @@ export const useUserStore = defineStore('user', {
         return error
       }
     },
-    async setUserDataQuery(info) {
+    async setUserDataQuery() {
       try {
-        const response = await backend.put(`/userdata`, info) 
+        const response = await backend.put(`/userdata`, this.userData) 
         this.userData = response.data     
       } catch (error) {
         return error
