@@ -7,7 +7,7 @@
       </div>
       <div v-else>
         <NuxtLink :to="`/user/${$route.params.id}`">
-          <BtnWithoutBg>Save</BtnWithoutBg>
+          <BtnWithoutBg @click="userStore.setUserDataQuery">Save</BtnWithoutBg>
         </NuxtLink>
       </div>
       <DefaultBtn @click="logout" class="btn">Logout</DefaultBtn>

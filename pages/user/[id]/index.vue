@@ -103,7 +103,6 @@ export default {
       this.technologes = this.userStore.userData.technologes
       return this.userStore.userData
     },
-
   },
   setup(){
     const userStore = useUserStore();
